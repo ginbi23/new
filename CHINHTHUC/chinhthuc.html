@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>BiTech Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    /* 1. Body + Font */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0f2f5;
+  color: #333;
+}
+
+/* 2. Hero Section (sửa lại để xài video nền) */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+.hero h1 {
+  font-size: 5rem;
+  font-weight: 800;
+  animation: fadeDown 1s ease-out;
+}
+.hero p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  animation: fadeUp 1.2s ease-out;
+}
+
+/* Video nền chiếm full màn + nằm dưới chữ */
+.hero video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: -1;
+}
+.hero-section {
+  position: relative; /* để overlay định vị tuyệt đối bên trong */
+  min-height: 100vh;  /* cho phần Hero cao bằng màn hình */
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* màu đen mờ */
+  backdrop-filter: blur(8px);     /* hiệu ứng kính mờ */
+  z-index: 1;                     /* nằm dưới chữ */
+}
+.content-layer {
+  position: relative;
+  z-index: 2; /* lớp trên overlay */
+}
+
+
+
+@keyframes fadeDown {
+  0% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+/* Navbar Brand (tên "BiTech") */
+.navbar-brand {
+  margin-right: 18px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Navbar Links (Giới thiệu, Dịch vụ, Liên hệ) */
+.nav-link {
+  font-size: 18px;
+  font-weight: 500;
+}
+/* Nút cyan - đồng bộ theme */
+.btn-cyan {
+  background-color: #0dcaf0;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-cyan:hover {
+  background-color: #0ba5c9;
+  color: #fff;
+}
+
+/* Nút gradient nhẹ nhàng */
+.btn-gradient {
+  background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #9572d1, #f99ddc);
+  color: white;
+}
+
+.food-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.food-card img {
+  height: 220px;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.food-card .card-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.food-card .card-text {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+.text-teal {
+  color: #00bfa6;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+.ingredients-section {
+  background: linear-gradient(to right, #fff0f5, #ffe6f0);
+}
+
+.text-pink {
+  color: #ec4899;
+}
+
+.btn-pink {
+  background: linear-gradient(45deg, #ec4899, #f472b6);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.btn-pink:hover {
+  background: linear-gradient(45deg, #db2777, #e11d48);
+  color: white;
+}
+/*bếp*/
+.text-yellow {
+  color: #fbbf24;
+}
+
+.kitchen-tips .tip-box {
+  transition: all 0.3s ease;
+}
+.kitchen-tips .tip-box:hover {
+  transform: translateX(5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.stats-section {
+      background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+      padding: 60px 0;
+    }
+.stats-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+.newsletter-section {
+      background: #fffde7;
+      padding: 80px 0;
+    }
+.subscribe-input {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .price {
+      color: #ff4fa0; /* Màu hồng cho giá */
+      font-weight: bold;
+    }
+    .title-highlight {
+      color: #ff4fa0; /* Màu hồng cho chữ Nấu Ăn */
+    }
+    .img-rounded {
+      border-radius: 12px;
+    }
+    .partners-section {
+  background: #fff; /* hoặc gradient nhẹ */
+}
+
+.partner-box {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 20px 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.partner-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.partner-box .emoji {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.partner-box .label {
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+.faq-section {
+  background: linear-gradient(to right, #ffe6f0, #fdf2f8);
+}
+
+.icon-box {
+  background-color: #f472b6;
+  color: white;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 18px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.faq-box {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.text-pink {
+  color: #ec4899;
+}
+
+.footer-section {
+  background-color: #111827; /* Màu nền đen nhẹ */
+  color: white;
+}
+
+.footer-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+}
+
+.bg-cyan {
+  background-color: #06b6d4;
+}
+
+.bg-pink {
+  background-color: #ec4899;
+}
+
+.bg-yellow {
+  background-color: #facc15;
+}
+
+.text-teal {
+  color: #14b8a6;
+}
+
+  </style>
+
+</head>
+<body>
+<!-- Hồng Vy -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">SBY Astronaut UNIVERSE</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#gioithieu">Giới thiệu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#dichvu">Dịch vụ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#lienhe">Liên hệ</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</head>
+<body>
+<section class="hero">
+  <video id="heroVideo" autoplay muted loop playsinline>
+    <source src="media.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="container content-layer text-center text-white">
+    <h1>SBY <span style="color:#0dcaf0">ASTRONAUT</span> UNIVERSE</h1>
+    <p>Mỗi người một hành tinh - Cùng tạo nên vũ trụ sáng tạo</p>
+    <div class="mt-4">
+      <a href="#batdau" class="btn btn-cyan btn-lg me-3">Bắt Đầu Nấu Ăn</a>
+      <a href="#congthuc" class="btn btn-gradient btn-lg">Xem Công Thức</a>
+    </div>
+  </div>
+</section>
+<script>
+  const video = document.getElementById("heroVideo");
+  video.play();
+  document.addEventListener("click", () => {
+    video.muted = !video.muted;
+  });
+</script>
+<section class="py-5" style="background: #1f1f1f; color: white;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-4" style="font-size: 2.5rem;">
+          Chào Mừng Đến Với <span style="color:#0dcaf0">Thế Giới Cô Gái Ăn</span>
+        </h2>
+        <p style="font-size: 1.2rem; color: #ccc;">
+          Chúng tôi mang đến cho bạn những công thức nấu ăn đặc sắc từ khắp nơi trên thế giới. 
+          Từ những món ăn truyền thống Việt Nam đến các món ăn quốc tế hiện đại.
+        </p>
+        <div class="d-flex gap-5 mt-4">
+          <div>
+            <h3 style="color:#0dcaf0;" class="fw-bold">500+</h3>
+            <p class="mb-0 text-white-50">Công Thức</p>
+          </div>
+          <div>
+            <h3 style="color:#f472b6;" class="fw-bold">50K+</h3>
+            <p class="mb-0 text-white-50">Người Dùng</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mt-4 mt-md-0">
+        <img src="https://dddn.1cdn.vn/2024/06/27/diendandoanhnghiep.vn-media-uploaded-350-2024-06-26-_hinh-2-nguon-unsplash.jpg"
+             alt="Phở Việt Nam" class="img-fluid rounded-4 shadow" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Khoa -->
+ <section class="mt-5">
+<div class="row g-4 justify-content-center">
+  <div class="col-md-4">
+    <div class="container">
+    <div class="card food-card">
+      <img src="https://image.plo.vn/w850/Uploaded/2025/tmuihk/2024_06_12/thoi-quen-an-trua-khong-lanh-manh-co-the-dan-den-tang-can-2716.jpg.webp" class="card-img-top" alt="Pasta Ý">
+      <div class="card-body">
+        <h5 class="card-title">Pasta Ý Truyền Thống</h5>
+        <p class="card-text">Công thức mì cổ điển với sốt chua tươi</p>
+        <a href="#" class="text-teal fw-semibold">Xem Công Thức →</a>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card food-card">
+      <img src="https://vitalius.com/images/library/0b/monika-grabkowska-759473-unsplash-0b9bb6-public_1280x960.jpg" class="card-img-top" alt="Bánh Xèo Ngọt">
+      <div class="card-body">
+        <h5 class="card-title">Bánh xèo Ngọt</h5>
+        <p class="card-text">Bánh pancake mềm với trái cây tươi</p>
+        <a href="#" class="text-teal fw-semibold">Xem Công Thức →</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="container">
+    <div class="card food-card">
+      <img src="https://www.uwgb.edu/getmedia/f11fc993-6edc-4a1d-b9f0-0dafb7b95cd4/person-chopping-cilantro.jpg" class="card-img-top" alt="Rau xào">
+      <div class="card-body">
+        <h5 class="card-title">Xào Rau Châu Á</h5>
+        <p class="card-text">Món xào rau củ đầy màu sắc và dinh dưỡng</p>
+        <a href="#" class="text-teal fw-semibold">Xem Công Thức →</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+ <section class="mt-5">
+<section class="py-5" 
+style="background: linear-gradient(to bottom, #fce4ec, #fff0f5);">
+  <div class="container text-center mb-5">
+    <h2 class="fw-bold" style="font-size: 2.5rem;">Danh Mục <span style="color: #ffc107;">Món Ăn</span></h2>
+    <p class="text-muted">Khám phá các loại món ăn đa dạng từ khắp nơi trên thế giới</p>
+  </div>
+
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🍜</div>
+          <div class="fw-semibold mt-2">Món Chính</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🍰</div>
+          <div class="fw-semibold mt-2">Tráng Miệng</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🥤</div>
+          <div class="fw-semibold mt-2">Đồ uống</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🥗</div>
+          <div class="fw-semibold mt-2">Món Nhẹ</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🍲</div>
+          <div class="fw-semibold mt-2">Súp</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🥖</div>
+          <div class="fw-semibold mt-2">Bánh Mì</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🦐</div>
+          <div class="fw-semibold mt-2">Hải Sản</div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm py-4 text-center" style="background-color: #fff7fa; border-radius: 1rem;">
+          <div class="fs-2">🥬</div>
+          <div class="fw-semibold mt-2">Chay</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</section>
+<section class="py-5" id="congthuc" style="background: #fff;">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-3" style="font-size: 2.5rem;">Công Thức <span class="text-primary">Phổ Biến</span></h2>
+    <p class="text-center text-muted mb-5">Các công thức được cộng đồng yêu thích và chia sẻ nhiều nhất</p>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card food-card h-100">
+          <img src="https://www.huongnghiepaau.com/wp-content/uploads/2022/10/cach-lam-banh-mi-ngot.jpg" class="card-img-top" alt="Bánh Mì Tự Làm">
+          <div class="card-body">
+            <h5 class="card-title">Bánh Mì Tự Làm</h5>
+            <p class="d-flex justify-content-between text-muted small mb-2">
+              <span><i class="bi bi-clock"></i> 2 giờ</span>
+              <span><i class="bi bi-bar-chart"></i> Trung bình</span>
+              <span><i class="bi bi-star-fill text-warning"></i> 4.8</span>
+            </p>
+            <a href="#" class="btn btn-cyan w-100">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card food-card h-100">
+          <img src="https://cdn.tgdd.vn/2020/09/CookProduct/Untitled-1-1200x676-18.jpg" class="card-img-top" alt="Súp Rau Củ">
+          <div class="card-body">
+            <h5 class="card-title">Súp Rau Củ</h5>
+            <p class="d-flex justify-content-between text-muted small mb-2">
+              <span><i class="bi bi-clock"></i> 45 phút</span>
+              <span><i class="bi bi-bar-chart"></i> Dễ</span>
+              <span><i class="bi bi-star-fill text-warning"></i> 4.9</span>
+            </p>
+            <a href="#" class="btn btn-cyan w-100">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card food-card h-100">
+          <img src="https://mamamy.vn/wp-content/uploads/2022/06/com-hinh-thu-cho-be-an-dam.jpg" class="card-img-top" alt="Món Ăn Trẻ Em">
+          <div class="card-body">
+            <h5 class="card-title">Món Ăn Trẻ Em</h5>
+            <p class="d-flex justify-content-between text-muted small mb-2">
+              <span><i class="bi bi-clock"></i> 30 phút</span>
+              <span><i class="bi bi-bar-chart"></i> Dễ</span>
+              <span><i class="bi bi-star-fill text-warning"></i> 4.7</span>
+            </p>
+            <a href="#" class="btn btn-cyan w-100">Xem Chi Tiết</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Phước Thiện -->
+<section class="py-5" style="background: linear-gradient(to right, #fffde7, #fff8e1);">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-4" style="font-size: 2.2rem;">
+          Video <span style="color: #f4b400;">Hướng Dẫn</span>
+        </h2>
+        <p style="font-size: 1.1rem; color: #555;">
+          Học nấu ăn dễ dàng hơn với các video hướng dẫn chi tiết từng bước.  
+          Từ những kỹ thuật cơ bản đến những món ăn phức tạp.
+        </p>
+        <ul class="list-unstyled mt-4 mb-4" style="font-size: 1rem; color: #666;">
+          <li class="mb-2">🍳 Chi tiết hướng dẫn từng bước</li>
+          <li class="mb-2">🧠 Mẹo và thủ thuật từ chuyên gia</li>
+          <li class="mb-2">🎥 Video chất lượng HD</li>
+        </ul>
+        <a href="#" class="btn btn-warning text-white fw-semibold px-4 py-2 rounded-pill shadow-sm">
+          Xem Tất Cả Video
+        </a>
+      </div>
+      <div class="col-md-6 mt-4 mt-md-0 text-center">
+        <div class="ratio ratio-16x9 rounded-4 shadow overflow-hidden">
+          <iframe 
+            src="https://www.youtube.com/embed/mhDJNfV7hjk?si=D-A014DiXx_F1Qw_" 
+            title="YouTube video player" allowfullscreen 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-5" style="background-color: #e8f5e9;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" style="font-size: 2.5rem;">Khách Hàng <span style="color: #00bfa6;">Nói Gì</span></h2>
+      <p class="text-muted">Những phản hồi tích cực từ cộng đồng yêu nấu ăn</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div class="bg-white rounded-4 p-4 shadow-sm h-100 text-center">
+          <div class="mb-3 text-warning fs-5">
+            ★★★★★
+          </div>
+          <p class="fst-italic">" Các công thức ở đây rất dễ làm theo, còn tôi rất thích những món ăn tôi nấu! "</p>
+          <h6 class="fw-bold mt-3 mb-0">Chị Hoa</h6>
+          <small class="text-muted">Mẹ của 2 con</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bg-white rounded-4 p-4 shadow-sm h-100 text-center">
+          <div class="mb-3 text-warning fs-5">
+            ★★★★★
+          </div>
+          <p class="fst-italic">" Tôi mới học nấu ăn nhưng với những hướng dẫn chi tiết, tôi đã có thể nấu được những món ngon. "</p>
+          <h6 class="fw-bold mt-3 mb-0">Anh Tuấn</h6>
+          <small class="text-muted">Doanh nhân</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bg-white rounded-4 p-4 shadow-sm h-100 text-center">
+          <div class="mb-3 text-warning fs-5">
+            ★★★★★
+          </div>
+          <p class="fst-italic">" Trang web này đã giúp tôi khám phá nhiều món ăn mới và cải thiện kỹ năng nướng. "</p>
+          <h6 class="fw-bold mt-3 mb-0">Cô Mai</h6>
+          <small class="text-muted">Giáo viên</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="py-5" style="background-color: #fff;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" style="font-size: 2.5rem;">Blog <span style="color: #fbbf24;">Ẩm Thực</span></h2>
+      <p class="text-muted">Những bài viết hữu ích về ẩm thực và kỹ thuật nấu nướng</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden h-100">
+          <img src="https://naiconcept.com/wp-content/uploads/2023/09/4a5235_993440ad49824c6fb050b66933269072mv2.webp" class="card-img-top" alt="ảnh blog 1">
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge bg-light text-success fw-semibold">Nhiếp Ảnh</span>
+              <small class="text-muted">15 Tháng 6, 2025</small>
+            </div>
+            <h5 class="card-title fw-bold">10 Mẹo Chụp Ảnh Món Ăn Đẹp</h5>
+            <p class="card-text text-muted">Học cách chụp ảnh món ăn như một nhiếp ảnh gia chuyên nghiệp</p>
+            <a href="#" class="text-teal fw-semibold text-decoration-none">Đọc Thêm →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden h-100">
+          <img src="https://bepos.io/wp-content/uploads/2023/01/nghe-thuat-trinh-bay-mon-an-20.jpg" class="card-img-top" alt="ảnh blog 2">
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge bg-light text-info fw-semibold">Trang Trí</span>
+              <small class="text-muted">12 Tháng 6, 2025</small>
+            </div>
+            <h5 class="card-title fw-bold">Nghệ Thuật Trang Trí Món Ăn</h5>
+            <p class="card-text text-muted">Cách trang trí và trình bày món ăn để thu hút thực khách</p>
+            <a href="#" class="text-teal fw-semibold text-decoration-none">Đọc Thêm →</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden h-100">
+          <img src="https://atvstp.org.vn/wp-content/uploads/2019/03/pic1-van-de-ve-sinh-an-toan-thuc-pham-hien-nay-rat-quan-trong.jpg" class="card-img-top" alt="ảnh blog 3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge bg-light text-success fw-semibold">Nguyên Liệu</span>
+              <small class="text-muted">10 Tháng 6, 2025</small>
+            </div>
+            <h5 class="card-title fw-bold">Select Nguyên Liệu Tươi Ngon</h5>
+            <p class="card-text text-muted">Bí chọn nguyên liệu tươi ngon cho quyết định món ăn hoàn hảo</p>
+            <a href="#" class="text-teal fw-semibold text-decoration-none">Đọc Thêm →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Minh Khoi -->
+<!--10. nguyên liệu -->
+<section class="ingredients-section py-5">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <!-- Hình ảnh -->
+      <div class="col-md-6">
+        <img src="https://atvstp.org.vn/wp-content/uploads/2019/03/pic1-van-de-ve-sinh-an-toan-thuc-pham-hien-nay-rat-quan-trong.jpg" alt="Nguyên liệu tươi" class="img-fluid rounded-4 shadow">
+      </div>
+      <!-- Nội dung -->
+      <div class="col-md-6">
+        <h2 class="fw-bold">Nguyên Liệu <span class="text-pink">Tươi Ngon</span></h2>
+        <p class="text-muted">
+          Chúng tôi hướng dẫn bạn cách lựa chọn và bảo quản nguyên liệu để có những món ăn tuyệt vời nhất.
+        </p>
+        <ul class="list-unstyled text-muted">
+          <li>✅ Cách chọn rau tươi ngon</li>
+          <li>✅ Bảo quản cá cá đúng cách</li>
+          <li>✅ Gia vị và cách sử dụng</li>
+          <li>✅ Nguồn cung cấp uy tín</li>
+        </ul>
+        <a href="#" class="btn btn-pink mt-3">Xem Hướng Dẫn</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="kitchen-tips py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Mẹo Vặt <span class="text-yellow">Nhà Bếp</span></h2>
+      <p class="text-muted">Những mẹo vặt hữu ích giúp bạn nấu ăn dễ dàng và hiệu quả hơn</p>
+    </div>
+    
+    <div class="row align-items-center g-4">
+      <div class="col-md-6">
+        <img src="https://i1-suckhoe.vnecdn.net/2025/06/25/pexels-mikebirdy-211760-1-1750-1674-8379-1750821512.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=DZWHNGimIgRs4G_0wd0_qQ" alt="Mẹo vặt nhà bếp" class="img-fluid rounded-4 shadow">
+      </div>
+      <div class="col-md-6 d-flex flex-column gap-3">
+        <div class="tip-box shadow-sm p-3 rounded-3 bg-white">
+          <h6 class="fw-bold mb-1">Cách Sử Dụng Dao Đúng Cách</h6>
+          <p class="text-muted mb-0">Kỹ thuật cầm dao và thái thực phẩm an toàn, hiệu quả</p>
+        </div>
+        <div class="tip-box shadow-sm p-3 rounded-3 bg-white">
+          <h6 class="fw-bold mb-1">Nhiệt Độ Nấu Chuẩn Bị</h6>
+          <p class="text-muted mb-0">Bảng nhiệt độ chuẩn cho từng loại thực phẩm</p>
+        </div>
+        <div class="tip-box shadow-sm p-3 rounded-3 bg-white">
+          <h6 class="fw-bold mb-1">Thời Gian Nấu Tối Ưu</h6>
+          <p class="text-muted mb-0">Cách tính toán thời gian nấu để món ăn hoàn hảo</p>
+        </div>
+        <div class="tip-box shadow-sm p-3 rounded-3 bg-white">
+          <h6 class="fw-bold mb-1">Vệ Sinh Nhà Bếp</h6>
+          <p class="text-muted mb-0">Giữ không gian nấu ăn sạch sẽ và an toàn</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="stats-section py-5 text-center text-dark bg-light">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Thành Tích <span style="color: #0dcaf0">Của Chúng Tôi</span></h2>
+    <p class="text-muted mb-5">Những con số ấn tượng từ cộng đồng nấu ăn của chúng tôi</p>
+    <div class="row g-4">
+      <div class="col-6 col-md-3">
+        <div>
+          <div class="fs-1">📝</div>
+          <h3 class="fw-bold" style="color: #0dcaf0">500+</h3>
+          <p class="text-muted mb-0">Công Thức</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div>
+          <div class="fs-1">👥</div>
+          <h3 class="fw-bold" style="color: #0dcaf0">50K+</h3>
+          <p class="text-muted mb-0">Người Dùng</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div>
+          <div class="fs-1">👁️</div>
+          <h3 class="fw-bold" style="color: #0dcaf0">1 triệu+</h3>
+          <p class="text-muted mb-0">Lượt Xem</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div>
+          <div class="fs-1">😊</div>
+          <h3 class="fw-bold" style="color: #0dcaf0">95%</h3>
+          <p class="text-muted mb-0">Hài Lòng</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Cattuong -->
+<section class="newsletter-section text-center">
+    <h2><span class="fw-bold text-warning">Bản tin</span> <span class="fw-bold">Đăng Ký</span></h2>
+    <p>Nhận công thức mới, mẹo nấu ăn và đãi ngộ đặc biệt mỗi tuần</p>
+    <div class="subscribe-input d-flex justify-content-center mt-3">
+      <input type="email" class="form-control me-2" placeholder="Nhập email của bạn..." />
+      <button class="btn btn-warning fw-bold">Đăng Ký</button>
+    </div>
+    <p class="mt-2 text-muted" style="font-size: 0.9em;">Chúng tôi không spam. Bạn có thể hủy đăng ký bất cứ lúc nào.</p>
+  </section>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <h1 class="fw-bold">Khóa Học <span class="title-highlight">Nấu Ăn</span></h1>
+      <p class="text-muted">Tham khảo các khóa học nấu ăn từ cơ bản đến nâng cao</p>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <img src="https://images.pexels.com/videos/8507772/pexels-photo-8507772.jpeg" alt="Lớp nấu ăn" class="img-fluid img-rounded">
+      </div>
+      <div class="col-md-6">
+        <h4 class="fw-bold">Học Cô Gái Ăn Cùng Chuyên Gia</h4>
+        <p class="text-muted">Tham gia các lớp học trực tiếp hoặc trực tuyến với các chuyên gia đầu bếp.</p>
+
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <div class="fw-bold">Khóa Cơ Bản</div>
+            <div class="text-muted">4 buổi</div>
+          </div>
+          <div class="text-end">
+            <div class="price">500.000đ</div>
+            <a href="#" class="text-info">Đăng Ký</a>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <div class="fw-bold">Khóa Nâng Cao</div>
+            <div class="text-muted">8 buổi</div>
+          </div>
+          <div class="text-end">
+            <div class="price">1.200.000đ</div>
+            <a href="#" class="text-info">Đăng Ký</a>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <div class="fw-bold">Khóa Chuyên Sâu</div>
+            <div class="text-muted">12 buổi</div>
+          </div>
+          <div class="text-end">
+            <div class="price">2.500.000đ</div>
+            <a href="#" class="text-info">Đăng Ký</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<div class="container my-5">
+  <div class="p-4 rounded" style="background: linear-gradient(135deg, #e0fdfa, #d2f5ef);">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold">Ứng Dụng <span style="color: #00b894;">Di Động</span></h2>
+        <p class="text-muted">Tải ứng dụng để có thể nấu ăn mọi lúc mọi nơi cùng với hàng chiến công thức trong tay.</p>
+        <ul class="list-unstyled">
+          <li class="mb-1"><span class="text-success">✔</span> Công thức hàng offline</li>
+          <li class="mb-1"><span class="text-success">✔</span> Timer nấu ăn thông minh</li>
+          <li class="mb-1"><span class="text-success">✔</span> Danh sách mua sắm tự động</li>
+          <li class="mb-1"><span class="text-success">✔</span> Chia sẻ với bạn bè</li>
+        </ul>
+        <div class="d-flex gap-2 mt-3">
+          <a href="#" class="btn btn-success" style="background-color: #00b894; border: none;">
+            <i class="bi bi-shop"></i> Cửa hàng ứng dụng
+          </a>
+          <a href="#" class="btn btn-success" style="background-color: #00b894; border: none;">
+            <i class="bi bi-google-play"></i> Google Play
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="https://sf1.psychologies.com/wp-content/uploads/psycho/2025/02/shutterstock_2171039691-1-750x410.jpg" alt="Ứng dụng nấu ăn" class="img-fluid rounded">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bi -->
+<section class="partners-section py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">Đối Tác <span class="text-yellow">Của Chúng Tôi</span></h2>
+    <p class="text-muted mb-5">Hợp tác cùng những thương hiệu uy tín trong ngành ẩm thực</p>
+    
+    <div class="row justify-content-center g-4">
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">🍴</div>
+          <p class="label">Nhà Hàng A</p>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">🌸</div>
+          <p class="label">Thương hiệu B</p>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">🔍</div>
+          <p class="label">Dụng Cụ C</p>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">🧄</div>
+          <p class="label">Nguyên Liệu D</p>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">📺</div>
+          <p class="label">Kênh Ẩm Thực E</p>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">🏪</div>
+          <p class="label">Siêu Thị F</p>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">👩‍🍳</div>
+          <p class="label">Học Viện G</p>
+        </div>
+      </div>
+      <div class="col-6 col-sm-4 col-md-3">
+        <div class="partner-box">
+          <div class="emoji">📱</div>
+          <p class="label">Ứng Dụng H</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="faq-section py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-2">Câu Hỏi <span class="text-pink">Thường Gặp</span></h2>
+    <p class="text-center text-muted mb-5">Những câu hỏi phổ biến từ cộng đồng nấu ăn</p>
+
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="faq-box d-flex mb-3">
+          <div class="icon-box">?</div>
+          <div>
+            <h5 class="fw-semibold">Làm sao để đăng nhập tài khoản?</h5>
+            <p class="text-muted">Bạn có thể đăng ký tài khoản miễn phí bằng cách nhấp vào nút 'Đăng Ký' và điền thông tin cơ bản.</p>
+          </div>
+        </div>
+        <div class="faq-box d-flex mb-3">
+          <div class="icon-box">?</div>
+          <div>
+            <h5 class="fw-semibold">Có bị mất phí khi sử dụng không?</h5>
+            <p class="text-muted">Chúng tôi có cả phiên bản miễn phí và cao cấp. Phiên bản miễn phí có đầy đủ các cơ sở công thức.</p>
+          </div>
+        </div>
+        <div class="faq-box d-flex mb-3">
+          <div class="icon-box">?</div>
+          <div>
+            <h5 class="fw-semibold">Làm sao để lưu công thức yêu thích?</h5>
+            <p class="text-muted">Sau khi đăng nhập, bạn có thể nhấp vào biểu tượng trái tim để lưu công thức vào danh sách yêu thích.</p>
+          </div>
+        </div>
+        <div class="faq-box d-flex mb-3">
+          <div class="icon-box">?</div>
+          <div>
+            <h5 class="fw-semibold">Có thể xuất bản công thức mới không?</h5>
+            <p class="text-muted">Chắc chắn rồi! Chúng tôi luôn chào đón các công thức mới từ cộng đồng.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer-section py-5 text-white">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-md-3">
+        <h5 class="fw-bold text-teal">Nấu Ăn Ngon</h5>
+        <p class="text-white-50">Nền tảng chia sẻ công thức nấu ăn hàng đầu Việt Nam</p>
+        <div class="d-flex gap-2">
+          <span class="footer-icon bg-cyan">🍽️</span>
+          <span class="footer-icon bg-pink">📷</span>
+          <span class="footer-icon bg-yellow">👩‍🍳</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h6 class="fw-semibold">Danh Mục</h6>
+        <ul class="list-unstyled text-white-50">
+          <li>Món Chính</li>
+          <li>Tráng Miệng</li>
+          <li>Đồ uống</li>
+          <li>Món Nhẹ</li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="fw-semibold">Hỗ trợ</h6>
+        <ul class="list-unstyled text-white-50">
+          <li>Trung Tâm Trợ Giúp</li>
+          <li>Liên Hệ</li>
+          <li>Điều khoản</li>
+          <li>Chính Sách</li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="fw-semibold">Liên Hệ</h6>
+        <ul class="list-unstyled text-white-50">
+          <li><span>📧</span> info@nauanngon.com</li>
+          <li><span>📞</span> 0123 456 789</li>
+          <li><span>📍</span> 123 Đường ABC, Hà Nội</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="text-white-50 mt-5" />
+    <p class="text-center text-white-50 small">© 2025 Cô Ăn Ngon. Tất cả quyền được bảo vệ.</p>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
